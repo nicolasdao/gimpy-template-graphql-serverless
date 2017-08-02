@@ -10,46 +10,27 @@ const sanitizeFunctionName = name => name ? name.trim().split(' ').map(x => x.to
 const sanitizeBucket = name => name ? name.trim().split(' ').map(x => x.toLowerCase()).join('-') : null
 const TRIGGERS = { '1': '--trigger-http', '2': '--trigger-topic', '3': '--trigger-bucket' }
 
-const emulatorNotInstalledWarningQuestion = functionsNotInstalled => functionsNotInstalled 
-	? askQuestion(`
-${'WARNING'.bold.italic}: ${'Google Function Emulator'.italic} seems to not be installed on your machine.
-
-You won't be able to run this project on your local machine. 
-We recommend to install it globally: ${'npm install -g @google-cloud/functions-emulator'.bold.italic}
-
-Do you want to ignore this warning? (y/n) `.yellow)
-		.then(answer => {
-			if (answer == 'n')
-			/*eslint-disable */
-                process.exit(1)
-                /*eslint-enable */
-		})
-	: Promise.resolve('ok')
-
-const gcloudNotInstalledWarningQuestion = gcloudNotInstalled => gcloudNotInstalled 
-	? askQuestion(
-		`${`
-WARNING`.bold.italic}: The ${'gcloud SDK'.italic} seems to not be installed on your machine.
-
-You won't be able to use your terminal to deploy this project to your Google Cloud Account. 
-We recommend to install it (instructions here: ${'https://cloud.google.com/sdk/downloads'.underline.italic.blue}).
-
-Do you want to ignore this warning? (y/n) `.yellow)
-		.then(answer => {
-			if (answer == 'n')
-			/*eslint-disable */
-                process.exit(1)
-                /*eslint-enable */
-		})
-	: Promise.resolve('ok')
-
 exports.preQuestions = () => {
 	const gcloudNotInstalled = !shell.exec('which gcloud', {silent:true}).stdout
-	return gcloudNotInstalledWarningQuestion(gcloudNotInstalled)
-		.then(() => {
-			const functionsNotInstalled = !shell.exec('which functions', {silent:true}).stdout
-			return emulatorNotInstalledWarningQuestion(functionsNotInstalled)
-		})
+	const functionsNotInstalled = !shell.exec('which functions', {silent:true}).stdout
+	if (gcloudNotInstalled) {
+		console.log(
+			`${'ERROR'.bold.italic}: The ${'gcloud SDK'.italic} seems to not be installed on your machine.\n`.yellow +
+			'You won\'t be able to use your terminal to deploy this project to your Google Cloud Account or run it locally.\n'.yellow +
+			`${'We recommend to install it (instructions here:'.yellow} ${'https://cloud.google.com/sdk/downloads'.underline.italic.blue}).\n`)
+		/*eslint-disable */
+        process.exit(1)
+        /*eslint-enable */
+	}
+	if (functionsNotInstalled) {
+		console.log(
+			(`${'ERROR'.bold.italic}: ${'Google Function Emulator'.italic} seems to not be installed on your machine.\n` +
+			'You won\'t be able to run this project on your local machine.\n' +
+			`We recommend to install it globally: ${'npm install -g @google-cloud/functions-emulator'.bold.italic}\n`).yellow)
+		/*eslint-disable */
+        process.exit(1)
+        /*eslint-enable */
+	}
 }
 
 exports.questions = [{
@@ -62,9 +43,9 @@ exports.questions = [{
 	},
 	files: ['package.json']
 },{
-	question: answers => `project version: (1.0.0) `.cyan,
+	question: () => 'project version: (1.0.0) '.cyan,
 	answerName: 'projectVersion',
-	defaultValue: answers => `1.0.0`,
+	defaultValue: () => '1.0.0',
 	files: ['package.json']
 },{
 	question: answers => `Google Cloud Function name : (${sanitizeFunctionName(answers.projectName)}) `.cyan,
@@ -75,13 +56,13 @@ exports.questions = [{
 	},
 	files: ['webconfig.json']
 },{
-	question: answers => ('Google Cloud Function trigger: \n' + 
-						 '  [1] HTTP \n' +
-						 '  [2] Pub/Sub \n' +
-						 '  [3] Storage \n' +
-						 'Choose one of the above: ([1]) ').cyan,
+	question: () => ('Google Cloud Function trigger: \n' + 
+					'  [1] HTTP \n' +
+					'  [2] Pub/Sub \n' +
+					'  [3] Storage \n' +
+					'Choose one of the above: ([1]) ').cyan,
 	answerName: 'trigger',
-	defaultValue: answers => 1,
+	defaultValue: () => 1,
 	execute: {
 		validate: answer => TRIGGERS[answer],
 		onSuccess: answer => TRIGGERS[answer],
