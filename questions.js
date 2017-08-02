@@ -34,7 +34,7 @@ exports.preQuestions = () => {
 }
 
 exports.questions = [{
-	question: answers => `project name: ${answers.dest ? `(${sanitizeDest(answers.dest)}) ` : ''} `.cyan,
+	question: answers => `project name: ${answers.dest ? `(${sanitizeDest(answers._dest)}) ` : ''} `.cyan,
 	answerName: 'projectName',
 	defaultValue: answers => answers.dest,
 	execute: {
