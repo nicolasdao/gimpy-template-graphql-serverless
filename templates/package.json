@@ -20,6 +20,6 @@
   "devDependencies": {
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
-    "gimpy": "^0.0.1"
+    "gimpy": "^0.1.0-alpha.2"
   }
 }
