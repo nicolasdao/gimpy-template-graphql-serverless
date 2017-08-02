@@ -54,7 +54,7 @@ exports.questions = [{
 	execute: {
 		onSuccess: answer => sanitizeFunctionName(answer)
 	},
-	files: ['webconfig.json']
+	files: ['appconfig.json']
 },{
 	question: () => ('Google Cloud Function trigger: \n' + 
 					'  [1] HTTP \n' +
@@ -68,7 +68,7 @@ exports.questions = [{
 		onSuccess: answer => TRIGGERS[answer],
 		onError: answer => `'${answer}' is not a valid trigger.`
 	},
-	files: ['webconfig.json']
+	files: ['appconfig.json']
 },{
 	question: answers => `Google Cloud Function entry-point (no spaces, no hyphens): (${sanitizeEntryPoint(answers.projectName)}) `.cyan,
 	answerName: 'entryPoint',
@@ -76,7 +76,7 @@ exports.questions = [{
 	execute: {
 		onSuccess: answer => sanitizeEntryPoint(answer)
 	},
-	files: ['index.js', 'webconfig.json']
+	files: ['index.js', 'appconfig.json']
 },{
 	question: answers => `Google Cloud Project: (${answers.projectName.toLowerCase()}) `.cyan,
 	answerName: 'googleProject',
@@ -84,7 +84,7 @@ exports.questions = [{
 	execute: {
 		onSuccess: answer => answer.toLowerCase()
 	},
-	files: ['webconfig.json']
+	files: ['appconfig.json']
 },{
 	question: answers => `Google Cloud Function bucket: (${sanitizeBucket(answers.projectName)}) `.cyan,
 	answerName: 'bucket',
@@ -92,5 +92,5 @@ exports.questions = [{
 	execute: {
 		onSuccess: answer => sanitizeBucket(answer)
 	},
-	files: ['webconfig.json']
+	files: ['appconfig.json']
 }]
