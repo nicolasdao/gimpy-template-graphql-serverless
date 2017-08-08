@@ -1,5 +1,5 @@
-# webconfig.json
-The webconfig.json allows you to configure your mini server to achieve 2 main goals:
+# appconfig.json
+The appconfig.json allows you to configure your mini server to achieve 2 main goals:
 1. Configuring CORS using the _headers_ property.
 2. Configuring one or many deployment environments using the _env_ property.
 
