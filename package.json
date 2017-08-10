@@ -1,5 +1,5 @@
 {
-  "name": "graphql-gcf",
+  "name": "graphql-serverless",
   "version": "1.0.0",
   "description": "GraphQL web server for google cloud functions or firebase functions.",
   "main": "questions.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicolasdao/gimpy-template-graphql-gcf.git"
+    "url": "git+https://github.com/nicolasdao/gimpy-template-graphql-serverless.git"
   },
   "keywords": [
     "graphql",
@@ -22,9 +22,9 @@
   "author": "Nicolas Dao",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/nicolasdao/gimpy-template-graphql-gcf/issues"
+    "url": "https://github.com/nicolasdao/gimpy-template-graphql-serverless/issues"
   },
-  "homepage": "https://github.com/nicolasdao/gimpy-template-graphql-gcf#readme",
+  "homepage": "https://github.com/nicolasdao/gimpy-template-graphql-serverless#readme",
   "devDependencies": {
     "eslint": "^4.4.1"
   }
