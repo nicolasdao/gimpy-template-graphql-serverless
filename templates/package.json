@@ -3,9 +3,7 @@
   "version": "{{projectVersion}}",
   "scripts": {
     "postinstall": "npm dedupe",
-    "test": "mocha",
-    "deploy": "gimp deploy",
-    "logs": "gimp logs"
+    "test": "mocha"
   },
   "dependencies": {
     "google-graphql-functions": "^0.1.0-alpha.1",
@@ -19,7 +17,6 @@
   },
   "devDependencies": {
     "chai": "^4.1.0",
-    "mocha": "^3.4.2",
-    "gimpy": "^0.1.0-alpha.2"
+    "mocha": "^3.4.2"
   }
 }

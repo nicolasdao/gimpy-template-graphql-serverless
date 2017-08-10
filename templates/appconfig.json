@@ -3,20 +3,21 @@
 		"Access-Control-Allow-Methods": "GET, HEAD, OPTIONS, POST",
 		"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
 	},
+	"hosting": "{{hosting}}",
 	"env": {
 		"active": "default",
 		"default": {
 			"functionName": "{{functionName}}",
-			"trigger": "{{trigger}}",
+			"trigger": "--trigger-http",
 			"entryPoint": "{{entryPoint}}",
-			"googleProject": "{{googleProject}}",
+			"project": "{{project}}",
 			"bucket": "{{bucket}}"
 		},
 		"build": {
 			"functionName": "{{functionName}}",
-			"trigger": "{{trigger}}",
+			"trigger": "--trigger-http",
 			"entryPoint": "{{entryPoint}}",
-			"googleProject": "{{googleProject}}",
+			"project": "{{project}}",
 			"bucket": "{{bucket}}"
 		}
 	},
