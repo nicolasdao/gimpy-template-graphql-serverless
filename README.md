@@ -10,7 +10,7 @@ npm install gimpy -g
 
 ## How To Use It
 ```
-gimp new graphql-gcf your-app
+gimp new graphql-serverless your-app
 cd your-app
 npm install
 gimp deploy
