@@ -1,4 +1,5 @@
-const { serveHTTP } = require('google-graphql-functions')
+const { HttpHandler } = require('graphql-serverless')
+const { serveHttp, app } = require('webfunc')
 const { makeExecutableSchema } = require('graphql-tools')
 const { glue } = require('schemaglue')
 
@@ -16,4 +17,6 @@ const graphqlOptions = {
     context: {} // add whatever global context is relevant to you app
 }
 
-exports.{{entryPoint}} = serveHTTP(graphqlOptions)
+app.use(new HttpHandler(graphqlOptions))
+
+exports.{{entryPoint}} = serveHttp(app.resolve({ path: '/', handlerId: 'graphql' }))
