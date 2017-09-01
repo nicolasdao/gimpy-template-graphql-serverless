@@ -4,6 +4,7 @@
   "scripts": {
     "postinstall": "npm dedupe",
     "test": "mocha",
+    "start": "gimp deploy",
     "deploy": "gimp deploy",
     "logs": "gimp logs"
   },

@@ -132,7 +132,7 @@ exports.deploy = (env = 'default') => {
 				shell.exec(`firebase use ${config.project}`)
 				shell.exec('firebase deploy --only functions')
 
-				console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). I'm proud my gimp. We didn't use the safety word at the end. I'll be harsher next time gimp!`.green)
+				console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). I'm proud gimp. We didn't use the safety word at the end. I'll be harsher next time!`.green)
 			}
 			catch(err) { 
 				console.log('Oops! Sorry but something went wrong Master!'.red)

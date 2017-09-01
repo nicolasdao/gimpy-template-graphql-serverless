@@ -13,7 +13,7 @@ const HOSTING = { '1': 'googlecloud', '2': 'firebase' }
 
 exports.preQuestions = () => {}
 
-exports.onTemplateLoaded = answers => `Congratulation Master! Your new ${answers.projectName.bold} Web Server project hosted on ${answers.hosting == 'googlecloud' ? 'Google Cloud' : 'Firebase'} Function is ready.\nNext step: Run ${answers._dest ? `cd ${answers._dest}; npm install`.italic.bold : 'npm install'.italic.bold}`
+exports.onTemplateLoaded = answers => `Congratulation Master! Your new ${answers.projectName.bold} web project hosted on ${answers.hosting == 'googlecloud' ? 'Google Cloud' : 'Firebase'} Function is ready.\nNext step: Run ${answers._dest ? `cd ${answers._dest}; npm install; npm start`.italic.bold : 'npm install'.italic.bold}`
 
 exports.questions = [{
 	question: answers => `project name: ${answers._dest ? `(${sanitizeDest(answers._dest)}) ` : ''} `.cyan,
