@@ -11,7 +11,7 @@
   "dependencies": {
     "graphql": "^0.9.3",
     "graphql-s2s": "^0.2.1",
-    "graphql-serverless": "0.2.0-alpha.2",
+    "graphql-serverless": "0.2.0-alpha.6",
     "graphql-tools": "^0.11.0",
     "lodash": "^4.17.4",
     "http-errors": "^1.6.1",
