@@ -6,7 +6,7 @@ exports.resolver = {
 	Query: {
 		products(root, { id }, context) {
 			const results = id ? productMocks.filter(p => p.id == id) : productMocks
-			if (results)
+			if (results.length > 0)
 				return results
 			else
 				throw httpError(404, `Product with id ${id} does not exist.`)
