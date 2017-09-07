@@ -36,8 +36,15 @@ const exitIf = (exitCondition, exitMsg) => {
 	if (exitCondition) {
 		console.log(exitMsg.red)
 		/*eslint-disable */
-		process.exit(1)
+		process.exit()
 		/*eslint-enable */
+	}
+}
+
+const stopIfError = ({ stderr }, msg, ignore) => {
+	if (stderr && (!ignore || stderr.indexOf(ignore) < 0)) {
+		console.log(msg.red)
+		process.exit()
 	}
 }
 
@@ -83,7 +90,11 @@ exports.deploy = (env = 'default') => {
 			updateAppConfigActive(appconfig, 'default')
 
 			console.log(`${'LOCALLY'.italic.bold} deploying entry-point ${config.entryPoint.italic.bold} using trigger type ${config.trigger.italic.bold}. Slap slap!!!`.cyan)
-			shell.exec(`functions deploy ${config.entryPoint} ${config.trigger}`)
+			const deployLocallyCommand = `functions deploy ${config.entryPoint} ${config.trigger}`
+			stopIfError(
+				shell.exec(deployLocallyCommand), 
+				`Naughty gimp!!! The ${deployLocallyCommand.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`
+			)
 		}
 		else {
 			exitIf(!config.functionName, `${'appconfig.json'.italic.bold} does not define any ${'functionName'.italic.bold} property under its ${env.italic.bold} environment. Spanking time!`)
@@ -93,11 +104,21 @@ exports.deploy = (env = 'default') => {
 			updateAppConfigActive(appconfig, env)
 
 			console.log(`Deploying entry-point ${config.entryPoint.italic.bold} to ${`GOOGLE CLOUD FUNCTION ${config.functionName}`.italic.bold} located in project ${config.project.italic.bold} using trigger type ${config.trigger.italic.bold}. Time to get the public humiliation started my gimp.`.cyan)
-			shell.exec(`gcloud config set project ${config.project}`)
-			shell.exec(`gcloud beta functions deploy ${config.functionName} --stage-bucket ${config.bucket} ${config.trigger} --entry-point ${config.entryPoint}`)
+			const settingProjectCommand = `gcloud config set project ${config.project}`
+			stopIfError(
+				shell.exec(settingProjectCommand),
+				`Naughty gimp!!! The ${settingProjectCommand.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`,
+				`Updated property`
+			)
+			const deployCommand = `gcloud beta functions deploy ${config.functionName} --stage-bucket ${config.bucket} ${config.trigger} --entry-point ${config.entryPoint}`
+			stopIfError(
+				shell.exec(deployCommand),
+				`Naughty gimp!!! The ${deployCommand.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`,
+				`Deploying function (may take a while`
+			)
 		}
 
-		console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). Good gimp... We didn't use the safety word at the end. I'll be harsher next time!`.green)
+		console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). I'm proud gimp. We didn't use the safety word at the end. I'll be harsher next time!`.green)
 	}
 	else {
 		exitIf(!config.project, `${'appconfig.json'.italic.bold} does not define any ${'project'.italic.bold} property under its ${env.italic.bold} environment.`)
@@ -113,8 +134,16 @@ exports.deploy = (env = 'default') => {
 				process.on('SIGINT', () => deleteFirebaserc())
 				/*eslint-enable */
 				console.log(`${'LOCALLY'.italic.bold} deploying entry-point ${config.entryPoint.italic.bold} using trigger type ${'HTTP'.italic.bold}.`.cyan)
-				shell.exec(`firebase use ${config.project}`)
-				shell.exec('firebase serve --only functions')
+				const firebaseSwitchProjectCmd = `firebase use ${config.project}`
+				stopIfError(
+					shell.exec(firebaseSwitchProjectCmd),
+					`Naughty gimp!!! The ${firebaseSwitchProjectCmd.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`
+				)
+				const firebaseServeLocallyCmd = 'firebase serve --only functions'
+				stopIfError(
+					shell.exec(firebaseServeLocallyCmd),
+					`Naughty gimp!!! The ${firebaseServeLocallyCmd.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`
+				)	
 			}
 			catch(err) {
 				console.log('Local server has stopped'.magenta)
@@ -129,10 +158,18 @@ exports.deploy = (env = 'default') => {
 
 			try {
 				console.log(`Deploying entry-point ${config.entryPoint.italic.bold} to ${'FIREBASE'.italic.bold} located in project ${config.project.italic.bold} using trigger type ${'HTTP'.italic.bold}`.cyan)
-				shell.exec(`firebase use ${config.project}`)
-				shell.exec('firebase deploy --only functions')
+				const firebaseSwitchProjectCmd = `firebase use ${config.project}`
+				stopIfError(
+					shell.exec(firebaseSwitchProjectCmd),
+					`Naughty gimp!!! The ${firebaseSwitchProjectCmd.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`
+				)
+				const firebaseDeployCmd = 'firebase deploy --only functions'
+				stopIfError(
+					shell.exec(firebaseDeployCmd),
+					`Naughty gimp!!! The ${firebaseDeployCmd.italic.bold} command crapped itself. Have a look above for more details. Fix it or I'll spank you again!`
+				)
 
-				console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). Good gimp... We didn't use the safety word at the end. I'll be harsher next time!`.green)
+				console.log(`Deployment successful (${(Date.now() - startClock)/1000} sec.). I'm proud gimp. We didn't use the safety word at the end. I'll be harsher next time!`.green)
 			}
 			catch(err) { 
 				console.log('Oops! Sorry but something went wrong Master!'.red)
