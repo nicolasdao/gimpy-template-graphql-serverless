@@ -43,8 +43,11 @@ const exitIf = (exitCondition, exitMsg) => {
 
 const stopIfError = ({ stderr }, msg, ignore) => {
 	if (stderr && (!ignore || stderr.indexOf(ignore) < 0)) {
+		console.log(stderr.red)
 		console.log(msg.red)
+		/*eslint-disable */
 		process.exit()
+		/*eslint-enable */
 	}
 }
 
