@@ -5,7 +5,7 @@
     "dev": "nodemon index.js",
     "postinstall": "npm dedupe",
     "start": "NODE_ENV=production now index.js",
-    "test": "mocha",
+    "test": "mocha"
   },
   "dependencies": {
     "graphql": "^0.9.3",
