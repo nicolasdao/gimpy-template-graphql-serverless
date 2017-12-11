@@ -1,9 +1,8 @@
 const { HttpHandler } = require('graphql-serverless')
-const graphqls2s = require('graphql-s2s')
+const { transpileSchema } = require('graphql-s2s').graphqls2s
 const { serveHttpUniversal, serveHttp, app } = require('webfunc')
 const { makeExecutableSchema } = require('graphql-tools')
 const { glue } = require('schemaglue')
-const { transpileSchema } = graphqls2s
 
 const { schema, resolver } = glue('./src/graphql')
 

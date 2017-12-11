@@ -3,7 +3,6 @@
   "version": "{{projectVersion}}",
   "scripts": {
     "dev": "nodemon index.js",
-    "postinstall": "npm dedupe",
     "start": "NODE_ENV=production now index.js",
     "test": "mocha"
   },
@@ -15,7 +14,7 @@
     "lodash": "^4.17.4",
     "http-errors": "^1.6.1",
     "schemaglue": "^1.5.1",
-    "webfunc": "0.6.0-alpha.8"
+    "webfunc": "0.6.0-alpha.9"
   },
   "devDependencies": {
     "chai": "^4.1.0",
