@@ -6,7 +6,7 @@ exports.resolver = {
 	Query: {
 		variants(root, { id }, context) {
 			const results = id ? variantMocks.filter(p => p.id == id) : variantMocks
-			if (results)
+			if (results.length > 0)
 				return results
 			else
 				throw httpError(404, `Variant with id ${id} does not exist.`)
