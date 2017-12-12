@@ -20,5 +20,5 @@ const graphqlOptions = {
 
 app.use(new HttpHandler(graphqlOptions))
 
-const server = serveHttp(app.resolve({ path: '/', handlerId: 'graphql' }))
+const server = serveHttp(app.resolve({ path: ['/', '/graphiql'], handlerId: 'graphql' }))
 eval(listen('server', 4000))

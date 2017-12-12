@@ -9,12 +9,12 @@
   "dependencies": {
     "graphql": "^0.9.3",
     "graphql-s2s": "^0.3.2",
-    "graphql-serverless": "0.2.0-alpha.6",
+    "graphql-serverless": "0.2.0-alpha.9",
     "graphql-tools": "^0.11.0",
     "lodash": "^4.17.4",
     "http-errors": "^1.6.1",
     "schemaglue": "^1.5.1",
-    "webfunc": "0.7.1-alpha.0"
+    "webfunc": "0.8.0-alpha.0"
   },
   "devDependencies": {
     "chai": "^4.1.0",
